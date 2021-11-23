@@ -8,7 +8,7 @@ def nothing(x):
 camSet='nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method='+str(flip)+' ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'
 cam=cv2.VideoCapture(camSet)
 cv2.namedWindow('nanoCam')
-cv2.createTrackbar('xVal','nanoCam',25,dispW,nothing)
+cv2.createTrackbar('xVal','nanoCam',25,dispW,nothing)     #create track bar
 cv2.createTrackbar('yVal','nanoCam',25,dispH,nothing)
 while True:
     ret, frame=cam.read()
