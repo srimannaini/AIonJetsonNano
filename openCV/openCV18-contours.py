@@ -17,16 +17,15 @@ cv2.createTrackbar('valHigh','Trackbars',255,255,nothing)
 
 
 
-dispW=640                #width of window or display
-dispH=480                #height of window
+dispW=320                #width of window or display
+dispH=240                #height of window
 flip=2                   #if we dont flip we see images ups and down
 camSet='nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method='+str(flip)+' ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'    #string variable it launches gstreamer to run the camera, native width that's coming out of camera full resolution, 21 f/s, 
 cam=cv2.VideoCapture(camSet)          #create camera object so if you want to work with camera use cam object
 while True:                           #to read frames of camera
     ret, frame=cam.read()             #read a frame returns a variable 0 or 1, other is images we give it to frame variable
     #frame=cv2.imread('smarties.png')  #read image in directory
-    cv2.imshow('piCam',frame)         #shows the frame in window piCam
-    cv2.moveWindow('piCam',0,0)       #move window
+    
 
     hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)      #convert to hsv image
     
@@ -55,20 +54,19 @@ while True:                           #to read frames of camera
     FGmaskComp=cv2.add(FGmask,FGmask2)
     cv2.imshow('FGmaskComp',FGmaskComp)
     cv2.moveWindow('FGmaskComp',0,410)
-
-    FG=cv2.bitwise_and(frame,frame,mask=FGmaskComp)
-    cv2.imshow('FG',FG)
-    cv2.moveWindow('FG',480,0)
-
-    BgMask=cv2.bitwise_not(FGmaskComp)
-    cv2.imshow('bgMask',BgMask)
-    cv2.moveWindow('bgMask',480,410)
-
-    BG=cv2.cvtColor(BgMask,cv2.COLOR_GRAY2BGR)
-
-    final=cv2.add(FG,BG)
-    cv2.imshow('final',final)
-    cv2.moveWindow('final',900,0)
+    
+    contours,_=cv2.findContours(FGmaskComp,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    contours=sorted(contours,key=lambda x:cv2.contourArea(x),reverse=True)
+    for cnt in contours:
+        area=cv2.contourArea(cnt)
+        (x,y,w,h)=cv2.boundingRect(cnt)
+        if area>=50:
+           # cv2.drawContours(frame,[cnt],0,(255,0,0),3)
+           cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),3)
+    #cv2.drawContours(frame,contours,0,(255,0,0),3)
+    cv2.imshow('piCam',frame)         #shows the frame in window piCam
+    cv2.moveWindow('piCam',0,0)       #move window
+    
 
     if cv2.waitKey(1)==ord('q'):      #to quit the window
         break                         #we break while loop
