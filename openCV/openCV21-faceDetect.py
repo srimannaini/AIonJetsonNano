@@ -10,7 +10,7 @@ face_cascade=cv2.CascadeClassifier('/home/nvidia/Desktop/Jetson/pyPro/cascade/fa
 while True:                           #to read frames of camera
     ret, frame=cam.read()             #read a frame returns a variable 0 or 1, other is images we give it to frame variable
     gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    faces=face_cascade.detectMultiScale(gray,1.3,5)
+    faces=face_cascade.detectMultiScale(gray,1.3,5) #find faces in gray and returns box corners
     for (x,y,w,h) in faces:
         cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255),2)
 
@@ -20,3 +20,8 @@ while True:                           #to read frames of camera
         break                         #we break while loop
 cam.release()                         #let go of camera
 cv2.destroyAllWindows()               #destroys all windows
+
+
+'''
+pretrained model for detecting faces
+download the model and do detection

@@ -21,8 +21,3 @@ cv2.destroyAllWindows()               #destroys all windows
 
 
 
-
-
-'''
-grab some models for training
-'''
