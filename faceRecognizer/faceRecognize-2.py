@@ -11,6 +11,7 @@ nancyEncode=face_recognition.face_encodings(nancyFace)[0]
 mikePense=face_recognition.load_image_file('/home/nvidia/Desktop/Jetson/pyPro/faceRecognizer/demoImages/known/Mike Pence.jpg')
 mikePense=face_recognition.face_encodings(mikePense)[0]
 
+
 Encodings=[donEncode,nancyEncode,mikePense]
 Names=['The Donals','Nancy Pelosi','Mike Pense']
 
