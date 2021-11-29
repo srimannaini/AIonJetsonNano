@@ -3,12 +3,9 @@ class Rectangle:
         self.width=w
         self.length=l
         self.color=c
-
-
     def area(self):
         self.area=self.width*self.length
         return self.area
-
     def per(self):
         self.perimeter=2*self.width+2*self.length
         return self.perimeter
@@ -21,6 +18,7 @@ areaRect1=rect1.area()
 print(areaRect1)
 per1=rect1.per()
 print('Rectangle 1 has perimeter:',per1)
+
 
 c2='blue'
 w2=3
