@@ -7,7 +7,7 @@ width=1280
 height=720
 #cam=jetson.utils.gstCamera(width,height,'/dev/video1')
 cam=jetson.utils.gstCamera(width,height,'0')
-outVid=cv2.VideoWriter('videos/recognize.avi',cv2.VideoWriter_fourcc(*'XVID'),21,(width,height)  )
+outVid=cv2.VideoWriter('videos/recognize2.avi',cv2.VideoWriter_fourcc(*'XVID'),21,(width,height)  )
 net=jetson.inference.imageNet('googlenet')
 timeMark=time.time()
 fpsFilter=0
@@ -27,7 +27,7 @@ while True:
     cv2.imshow('webCam',frame)
     cv2.moveWindow('webCam',0,0)
     outVid.write(frame)
-    if cv2.waitKey(1)==ord('q'):
+    if cv2.waitKey(2)==ord('q'):
         break
 cam.release()
 cv2.destroyAllWindows()

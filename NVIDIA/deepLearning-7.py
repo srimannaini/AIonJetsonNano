@@ -15,7 +15,7 @@ font=cv2.FONT_HERSHEY_SIMPLEX
 # Gstreamer code for improvded Raspberry Pi Camera Quality
 camSet='nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=60/1 ! nvvidconv flip-method='+str(flip)+' ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'    #string variable it launches gstreamer to run the camera, native width that's coming out of camera full resolution, 21 f/s, 
 cam=cv2.VideoCapture(camSet)          #create camera object so if you want to work with camera use cam object
-outVid=cv2.VideoWriter('videos/detect.avi',cv2.VideoWriter_fourcc(*'XVID'),21,(dispW,dispH)  )
+outVid=cv2.VideoWriter('videos/detect2.avi',cv2.VideoWriter_fourcc(*'XVID'),21,(dispW,dispH)  )
 #cam=jetson.utils.gstCamera(dispW,dispH,'0')
 
 #cam=cv2.VideoCapture('/dev/video1')
